@@ -1,5 +1,5 @@
 import React from 'react';
-import 'appointment/styles.scss';
+import 'components/Appointment/styles.scss';
 
 export default function Appointment() {
 
