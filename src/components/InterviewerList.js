@@ -4,10 +4,21 @@ import classNames from "classnames";
 
 export default function InterviewerList(props) {
 
+  let interviewerArray = props.interviewers.map((interviewer) =>
+    <InterviewerList
+      interviewers={interviewer.name}
+      interviewer={interviewer.id}
+      setInterviewer={props.setInterviewer}
+    />
+    )
+
   return (
-  <section className="interviewers">
-    <h4 className="interviewers__header text--light">Interviewer</h4>
-    <ul className="interviewers__list"></ul>
-  </section>
+    <ul>
+      {interviewerArray}
+    </ul>
+  // <section className="interviewers">
+  //   <h4 className="interviewers__header text--light">Interviewer</h4>
+  //   <ul className="interviewers__list"></ul>
+  // </section>
   )
 }
