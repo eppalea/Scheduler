@@ -13,7 +13,7 @@ export default function Form(props) {
 
   function cancel() {
     reset()
-    props.onCancel() //find out why onCancel is invoked. where is this function.
+    props.onCancel()
   }
 
   return (
@@ -38,7 +38,7 @@ export default function Form(props) {
       <section className="appointment__card-right">
         <section className="appointment__actions">
           <Button onClick={cancel} danger>Cancel</Button>
-          <Button onClick={props.onSave} confirm>Save</Button>
+          <Button onClick={props.onSave(name, interviewer)} confirm>Save</Button>
         </section>
       </section>
     </main>
