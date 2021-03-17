@@ -98,12 +98,12 @@ export default function Application(props) {
        
         {appointments.map((appointment) =>
           <Appointment
-            id={appointment.id}
-            time={appointment.time}
-            interview={appointment.interview}
+            key={appointment.id} 
+            {...appointment}
             />
           )}
         <Appointment key="last" time="5pm" />
+        
       </section>
     </main>
   );
