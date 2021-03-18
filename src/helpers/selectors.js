@@ -12,3 +12,13 @@ export function getAppointmentsForDay(state, day) {
   return dailyAppts;
 }
 
+export function getInterview(state, interview) {
+  console.log('state is: ', state);
+  console.log("interview is:", interview);
+  
+  if (!interview) {
+    return null;
+  }
+ 
+  return {interviewer: state.interviewers[interview.interviewer], student: interview.student}
+}
