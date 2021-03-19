@@ -22,3 +22,17 @@ export function getInterview(state, interview) {
  
   return {interviewer: state.interviewers[interview.interviewer], student: interview.student}
 }
+
+export function getInterviewersForDay(state, day) {
+  //... returns an array of interviewers for that day
+  const dailyInterviewers = [];
+
+  state.days.forEach((dayOfWeek) => {
+    if (dayOfWeek.name === day) {
+      dayOfWeek.interviewers.forEach((id) => {
+        dailyInterviewers.push(state.interviewers[id])
+      })
+    }
+  })
+  return dailyInterviewers;
+}
