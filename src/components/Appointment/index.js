@@ -6,6 +6,7 @@ import Show from 'components/Appointment/Show';
 import Form from 'components/Appointment/Form';
 import Status from 'components/Appointment/Status';
 import Confirm from 'components/Appointment/Confirm';
+import Error from 'components/Appointment/Error';
 import useVisualMode from '../../hooks/useVisualMode';
 
 const EMPTY = "EMPTY";
@@ -15,6 +16,8 @@ const SAVING = "SAVING";
 const DELETING = "DELETING";
 const CONFIRM = "CONFIRM";
 const EDITING = "EDITING";
+const ERROR_SAVE = "ERROR_SAVE";
+const ERROR_DELETE = "ERROR_DELETE";
 
 export default function Appointment(props) {
 
@@ -34,6 +37,7 @@ export default function Appointment(props) {
     .then(() => {
       transition(SHOW)
     })
+    .catch(error => transition(ERROR_SAVE));
   }
 
   function deleting() {
@@ -46,6 +50,7 @@ export default function Appointment(props) {
     .then(() => {
       transition(EMPTY)
     })
+    .catch(error => transition(ERROR_DELETE));
   }
 
 
@@ -99,6 +104,18 @@ export default function Appointment(props) {
           onCancel={back}
         />
       )}
+      {mode === ERROR_SAVE && (
+        <Error
+          message="Could not save appointment"
+          onClose={back}  
+        />
+      ) }
+      {mode === ERROR_DELETE && (
+        <Error
+          message="Could not delete appointment"
+          onClose={back}   
+        />
+      )} 
     </article>
   )
 }
