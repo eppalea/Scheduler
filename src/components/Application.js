@@ -8,8 +8,7 @@ import { getAppointmentsForDay, getInterview, getInterviewersForDay } from '../h
 
 
 export default function Application(props) {
-  // const [day, setDay] = useState(['Monday']);
-  // const [days, setDays] = useState([]);
+
   const [state, setState] = useState({
     day: 'Monday',
     days: [],
@@ -33,12 +32,12 @@ export default function Application(props) {
       [id]: appointment
     };
     
-    return axios.put(`/api/appointments/${id}`, {interview})
+    return axios.put(`http://localhost:8001/api/appointments/${id}`, {interview})
     .then(() => {
-      setState({
-        ...state,
+      setState((prevState) => ({
+        ...prevState,
         appointments
-      })
+      }));
     });
 
   };
@@ -54,7 +53,7 @@ export default function Application(props) {
       [id]: appointment
     };
 
-    return axios.delete(`/api/appointments/${id}`)
+    return axios.delete(`http://localhost:8001/api/appointments/${id}`)
     .then(() => {
       setState({
         ...state,
@@ -72,7 +71,6 @@ export default function Application(props) {
       axios.get('/api/interviewers')
     ])
       .then((all) => {
-        // console.log('all:', all);
         setState(prev => ({
           ...prev, 
           days: all[0].data, 
