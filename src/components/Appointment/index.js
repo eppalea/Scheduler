@@ -17,11 +17,14 @@ export default function Appointment(props) {
     );
   
   function save(name, interviewer) {
-    console.log('student', name, 'interviewer', interviewer);
+    console.log('student:', name, 'interviewer:', interviewer);
     const interview = {
       student: name,
       interviewer
     };
+    props.bookInterview(props.id, interview) 
+    console.log('id:', props.id, 'interview:', interview);
+    transition(SHOW)
   }
 
   return (
@@ -40,7 +43,6 @@ export default function Appointment(props) {
           interviewers={props.interviewers}
           onCancel={(back)}
           onSave={save}
-          interview={props.bookInterview}
         />
         )}    
     </article>
