@@ -23,6 +23,7 @@ export default function Application(props) {
         />
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
+        {/* {console.log('state.days is:', state.days[2])} */}
           <DayList
             days={state.days}
             day={state.day}

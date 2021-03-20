@@ -12,8 +12,34 @@ export default function useApplicationData() {
 
   const setDay = day => setState({...state, day });
 
+  const getSpotsRemaining = function(dayObj, appointments){
+   
+    let count = 0;
+
+    for (const id of dayObj.appointments) {
+      const appointment = appointments[id];
+      if (!appointment.interview) {
+        count++;
+      }
+    }
+    return count;
+  }
+    
+  const updateSpots = function(dayName, days, appointments) {
+    const day = days.find(item => item.name === dayName);
+    const unbookedSpots = getSpotsRemaining(day, appointments);
+
+    const newState = days.map(item => {
+      if (item.name === dayName) {
+        return {...item, spots: unbookedSpots}
+      }
+      return item;
+    })
+    return newState;
+  }
+  
   function bookInterview(id, interview) {
-    console.log("new id is:", id, "new interview is:", interview);
+    // console.log("new id is:", id, "new interview is:", interview);
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -23,18 +49,21 @@ export default function useApplicationData() {
       [id]: appointment
     };
     
+    const spots = updateSpots(state.day, state.days, appointments);
+
     return axios.put(`http://localhost:8001/api/appointments/${id}`, {interview})
     .then(() => {
       setState((prevState) => ({
         ...prevState,
-        appointments
+        appointments,
+        days: spots
       }));
     });
 
   };
 
   function cancelInterview(id) {
-    console.log('deleting id:', id);
+    // console.log('deleting id:', id);
     const appointment = {
       ...state.appointments[id],
       interview: null
@@ -44,15 +73,19 @@ export default function useApplicationData() {
       [id]: appointment
     };
 
+    const spots = updateSpots(state.day, state.days, appointments);
+
     return axios.delete(`http://localhost:8001/api/appointments/${id}`)
     .then(() => {
       setState({
         ...state,
-        appointments
+        appointments,
+        days: spots
       })
     })
 
   };
+
 
   useEffect(() => {
      
