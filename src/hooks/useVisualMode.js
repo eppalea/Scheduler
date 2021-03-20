@@ -7,13 +7,9 @@ export default function useVisualMode(initial) {
   const transition = (newMode, replace = false) => {
 
     if (replace) {
-      setHistory((prevState) => {
-        [...prevState.slice(0, -1), newMode] // removes last item, returns rest of array
-      }); 
+      setHistory((prevState) => [...prevState.slice(0, -1), newMode]); // removes last item, returns rest of array
     } else {
-      setHistory((prevState) => {
-        [...prevState, newMode]
-      });
+      setHistory((prevState) => [...prevState, newMode]);
     }
   };
   
@@ -22,7 +18,7 @@ export default function useVisualMode(initial) {
     if (history.length < 2) {
       return;
     } 
-   
+
     setHistory(prev => {
       // console.log('prev:', ...prev)
       const newHistory = [...prev];
@@ -32,6 +28,6 @@ export default function useVisualMode(initial) {
     });  
   };  
 
-  const mode = history.slice(-1)[0];
+  const mode = history.slice(-1)[0]; // create off history
   return { mode, transition, back };
 }

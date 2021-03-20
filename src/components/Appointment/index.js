@@ -34,10 +34,8 @@ export default function Appointment(props) {
     transition(SAVING);
     // console.log('id:', props.id, 'interview:', interview)
     props.bookInterview(props.id, interview) 
-    .then(() => {
-      transition(SHOW)
-    })
-    .catch(error => transition(ERROR_SAVE, true));
+    .then(() => transition(SHOW))
+    .catch(error => transition(ERROR_SAVE, true)); //the true implements a 'switcheroo' of the state'
   }
 
   function deleting() {
@@ -45,11 +43,9 @@ export default function Appointment(props) {
   }
 
   function confirmDelete() {
-    transition(DELETING)
+    transition(DELETING, true);
     props.cancelInterview(props.id)
-    .then(() => {
-      transition(EMPTY)
-    })
+    .then(() => transition(EMPTY))
     .catch(error => transition(ERROR_DELETE, true));
   }
 
