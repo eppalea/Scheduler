@@ -37,8 +37,6 @@ describe("Application", () => {
     // 2. Wait until the text "Archie Cohen" is displayed.
     await waitForElement(() => getByText(container, "Archie Cohen"));
     const appointment = getAllByTestId(container, "appointment")[0];
-    // console.log("container:", prettyDOM(container));
-    // console.log("test 2:", prettyDOM(appointment));
 
     // 3. Click the "Add" button on the first empty appointment.
     fireEvent.click(getByAltText(appointment, "Add"));
@@ -65,7 +63,7 @@ describe("Application", () => {
     const day = getAllByTestId(container, "day").find(day =>
       queryByText(day, "Monday")
     );
-    expect(getByText(day, "Monday")).toBeInTheDocument("no spots remaining");
-    // console.log("prettyDom day: ", prettyDOM(day));
+    expect(getByText(day, "no spots remaining")).toBeInTheDocument();
+    
   });
 });
