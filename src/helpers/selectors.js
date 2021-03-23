@@ -13,8 +13,8 @@ export function getAppointmentsForDay(state, day) {
 }
 
 export function getInterview(state, interview) {
-  console.log('state is: ', state);
-  console.log("interview is:", interview);
+  // console.log('state is: ', state);
+  // console.log("interview is:", interview);
   
   if (!interview) {
     return null;
