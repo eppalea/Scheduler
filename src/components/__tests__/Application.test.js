@@ -59,9 +59,13 @@ describe("Application", () => {
     
     // // 8. Wait until the element with the text "Lydia Miller-Jones" is displayed.
     await waitForElement(() => queryByText(appointment, "Lydia Miller-Jones"));
-    debug();
+    // debug();
 
     // // 9. Check that the DayListItem with the text "Monday" also has the text "no spots remaining".
-    // expect(DayListItem).toHaveValue("no spots remaining");
+    const day = getAllByTestId(container, "day").find(day =>
+      queryByText(day, "Monday")
+    );
+    expect(getByText(day, "Monday")).toBeInTheDocument("no spots remaining");
+    // console.log("prettyDom day: ", prettyDOM(day));
   });
 });
