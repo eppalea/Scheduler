@@ -7,8 +7,9 @@ import {
   getByAltText,
   getAllByTestId,
   getByText,
-  prettyDOM,
   getByPlaceholderText,
+  queryByText,
+  prettyDOM,
   fireEvent
 } from "@testing-library/react";
 
@@ -52,12 +53,13 @@ describe("Application", () => {
 
     // 6. Click the "Save" button on that same appointment.
     fireEvent.click(getByText(appointment, "Save"));
-    debug();
-
+    
     // 7. Check that the element with the text "Saving" is displayed.
     expect(getByText(appointment, "Saving")).toBeInTheDocument();
+    
     // // 8. Wait until the element with the text "Lydia Miller-Jones" is displayed.
-    // await waitForElement(() => getByText("Lydia Miller-Jones"));
+    await waitForElement(() => queryByText(appointment, "Lydia Miller-Jones"));
+    debug();
 
     // // 9. Check that the DayListItem with the text "Monday" also has the text "no spots remaining".
     // expect(DayListItem).toHaveValue("no spots remaining");
