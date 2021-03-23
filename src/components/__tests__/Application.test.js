@@ -52,10 +52,10 @@ describe("Application", () => {
 
     // 6. Click the "Save" button on that same appointment.
     fireEvent.click(getByText(appointment, "Save"));
+    debug();
 
     // 7. Check that the element with the text "Saving" is displayed.
-    // expect(save).toHaveValue("Saving");
-
+    expect(getByText(appointment, "Saving")).toBeInTheDocument();
     // // 8. Wait until the element with the text "Lydia Miller-Jones" is displayed.
     // await waitForElement(() => getByText("Lydia Miller-Jones"));
 
