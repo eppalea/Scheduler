@@ -1,4 +1,5 @@
 # Interview Scheduler
+React based project to schedule meetings in real-time. Displays appointments, days of the week and available spots.
 
 ## Setup
 
