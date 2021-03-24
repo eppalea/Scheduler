@@ -1,9 +1,8 @@
-import React from 'react';
+import React from "react";
 
+// State of an available appoinment 
 export default function Empty(props) {
-  // console.log('empty props:', props)
   return (
-
     <main className="appointment__add">
       <img
         className="appointment__add-button"
@@ -12,7 +11,5 @@ export default function Empty(props) {
         onClick={props.onAdd}
       />
     </main>
-
-  )
-
+  );
 }

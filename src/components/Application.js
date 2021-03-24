@@ -1,15 +1,23 @@
 import React from "react";
-import "components/Application.scss";
-import DayList from 'components/DayList';
-import 'components/Appointment';
+import DayList from "components/DayList";
 import Appointment from "components/Appointment";
-import { getAppointmentsForDay, getInterview, getInterviewersForDay } from '../helpers/selectors';
-import useApplicationData from '../hooks/useApplicationData';
+import useApplicationData from "../hooks/useApplicationData";
+import {
+  getAppointmentsForDay,
+  getInterview,
+  getInterviewersForDay,
+} from "../helpers/selectors";
+import "components/Application.scss";
+import "components/Appointment";
 
 export default function Application(props) {
+  const {
+    state,
+    setDay,
+    bookInterview,
+    cancelInterview,
+  } = useApplicationData();
 
-  const { state, setDay, bookInterview, cancelInterview } = useApplicationData();
-  
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const dailyInterviewers = getInterviewersForDay(state, state.day);
 
@@ -23,12 +31,7 @@ export default function Application(props) {
         />
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
-        {/* {console.log('state.days is:', state.days[2])} */}
-          <DayList
-            days={state.days}
-            day={state.day}
-            setDay={setDay}
-          />
+          <DayList days={state.days} day={state.day} setDay={setDay} />
         </nav>
         <img
           className="sidebar__lhl sidebar--centered"
@@ -37,26 +40,21 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-       
-        {
-          dailyAppointments.map((appointment) => {
-            const interview = getInterview(state, appointment.interview);           
-            return (
-              <Appointment
-                key={appointment.id} 
-                {...appointment}
-                interview={interview}
-                interviewers={dailyInterviewers}
-                bookInterview={bookInterview}
-                cancelInterview={cancelInterview}
-              />
-            )
-          })
-        }
+        {dailyAppointments.map((appointment) => {
+          const interview = getInterview(state, appointment.interview);
+          return (
+            <Appointment
+              key={appointment.id}
+              {...appointment}
+              interview={interview}
+              interviewers={dailyInterviewers}
+              bookInterview={bookInterview}
+              cancelInterview={cancelInterview}
+            />
+          );
+        })}
         <Appointment key="last" time="5pm" />
-        
       </section>
     </main>
   );
 }
-
