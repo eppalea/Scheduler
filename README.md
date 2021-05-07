@@ -19,6 +19,7 @@ Deleting Status:
 ## Setup
 
 Install dependencies with `npm install`.
+Visit https://github.com/eppalea/scheduler-api for access to companion server.
 
 ## Running Webpack Development Server
 
@@ -37,3 +38,14 @@ npm test
 ```sh
 npm run storybook
 ```
+
+## Dependencies
+
+axios
+classnames
+normalize.css
+react
+react-dom
+react-hooks-testing-library
+react-scripts
+
